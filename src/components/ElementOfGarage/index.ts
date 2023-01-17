@@ -1,0 +1,1 @@
+export { ElementOfGarage } from './ElementOfGarage'
