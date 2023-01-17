@@ -9,8 +9,8 @@ import styles from './styles.css'
 export const ElementOfGarage = (color: string, carName: string) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
 
-  const flag = createElementWithClassName({ tagName: 'img' })
-  flag.src = 'assets/flag.png'
+  const flag = createElementWithClassName({ tagName: 'div', classname: styles.flag })
+  flag.innerHTML = '&#128681'
 
   container.insertAdjacentHTML('afterbegin', CarImg(color))
 
@@ -18,6 +18,7 @@ export const ElementOfGarage = (color: string, carName: string) => {
     ChangeCarButtons(),
     ActionButtons(),
     Text({ tagName: 'span', text: carName, classname: styles.carName }),
+    flag,
   )
 
   return container
