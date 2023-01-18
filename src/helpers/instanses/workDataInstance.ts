@@ -24,7 +24,22 @@ class CarsInstance {
       },
     })
 
-  deleteCar = async (id) => await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
+  deleteCar = async (id: number) => await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
+
+  updateCar = async (id: number, body: string) =>
+    await fetch(`${this.garage}/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'aplication/json',
+      },
+    })
 }
 
-export const workDataInstance = new CarsInstance()
+class EngineMethods extends CarsInstance {
+  startEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=started`)
+
+  stopEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=stoped`)
+}
+
+export const workDataInstance = new EngineMethods()
