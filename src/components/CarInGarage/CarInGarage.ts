@@ -7,7 +7,7 @@ import { ActionButtons } from './ActionButtons'
 import { ChangeCarButtons } from './ChangeCarButtons'
 import styles from './styles.css'
 
-export const ElementOfGarage = ({ color, name, id }: Car) => {
+export const CarInGarage = ({ color, name, id }: Car) => {
   const container = createElementWithClassName({ tagName: 'li', classname: styles.container })
 
   container.append(ChangeCarButtons(id, name), CarImg(color), ActionButtons(id))

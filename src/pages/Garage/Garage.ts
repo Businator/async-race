@@ -1,4 +1,4 @@
-import { ElementOfGarage } from 'components/ElementOfGarage'
+import { CarInGarage } from 'components/CarInGarage'
 import { createElementWithClassName } from 'helpers'
 
 import { workDataInstance } from 'helpers/instanses'
@@ -10,7 +10,7 @@ export const Garage = async () => {
 
   const { items, count } = await workDataInstance.getCars(1)
 
-  items.forEach((car) => container.append(ElementOfGarage(car)))
+  items.forEach((car) => container.append(CarInGarage(car)))
 
   return container
 }
