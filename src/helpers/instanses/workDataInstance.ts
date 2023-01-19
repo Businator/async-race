@@ -42,6 +42,11 @@ class EngineMethods extends CarsInstance {
   startEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=started`)
 
   stopEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=stoped`)
+
+  drive = async (id: number) => {
+    const res = await fetch(`${this.engine}?id=${id}&status=stoped`)
+    return res.status !== 200 ? { success: false } : { ...((await res.json()) as Error) }
+  }
 }
 
 export const workDataInstance = new EngineMethods()

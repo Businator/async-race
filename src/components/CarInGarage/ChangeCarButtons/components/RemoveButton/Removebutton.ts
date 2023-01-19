@@ -6,10 +6,10 @@ import styles from './styles.css'
 
 export const RemoveButton = (id: number) => {
   const button = Button({
-    children: 'Start',
+    children: 'Delete',
     classname: styles.btn,
     onclick() {
-      workDataInstance.startEngine(id)
+      workDataInstance.deleteCar(id)
     },
   })
   return button
