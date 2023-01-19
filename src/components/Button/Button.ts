@@ -2,18 +2,28 @@ import { createElementWithClassName } from 'helpers'
 
 import { ButtonProps } from './types'
 
-export const Button = ({ children, classname, onclick }: ButtonProps) => {
+export const Button = ({ children, classname, onclick, type }: ButtonProps) => {
   const button = createElementWithClassName({ tagName: 'button', classname })
 
-  children && button.append(children)
+  // children && button.append(children)
 
-  const handleClick = (event: MouseEvent) => {
-    event.preventDefault()
-
-    onclick?.()
+  if (typeof children === 'string') {
+    button.textContent = children
   }
 
-  button.addEventListener('click', handleClick)
+  if (onclick) {
+    const handleClick = (event: MouseEvent) => {
+      event.preventDefault()
+
+      onclick()
+    }
+
+    button.addEventListener('click', handleClick)
+  }
+
+  if (typeof type === 'string') {
+    button.type = type
+  }
 
   return button
 }

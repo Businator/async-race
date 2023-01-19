@@ -7,41 +7,88 @@ class CarsInstance {
   engine = `${this.base}/engine`
 
   getCars = async (page: number, limit = 7): Promise<Cars> => {
-    const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`)
+    try {
+      const response = await fetch(`${this.garage}?_page=${page}&_limit=${limit}`)
 
-    return {
-      items: (await response.json()) as [Car],
-      count: response.headers.get('X-Total-Count'),
+      return {
+        items: (await response.json()) as [Car],
+        count: response.headers.get('X-Total-Count'),
+      }
+    } catch {
+      throw new Error()
     }
   }
 
-  getCar = async (id: number) => await fetch(`${this.garage}/${id}`)
+  getCar = async (id: number) => {
+    try {
+      const response = await fetch(`${this.garage}/${id}`)
+      return (await response.json()) as [Car]
+    } catch {
+      throw new Error()
+    }
+  }
 
-  createCar = async (body: string) =>
-    await fetch(this.garage, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'aplication/json',
-      },
-    })
+  createCar = async (car: Car) => {
+    try {
+      await fetch(this.garage, {
+        method: 'POST',
+        body: JSON.stringify(car),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    } catch {
+      throw new Error()
+    }
+  }
 
-  deleteCar = async (id: number) => await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
+  deleteCar = async (id: number) => {
+    try {
+      await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
+    } catch {
+      throw new Error()
+    }
+  }
 
-  updateCar = async (id: number, body: string) =>
-    await fetch(`${this.garage}/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'aplication/json',
-      },
-    })
+  updateCar = async (id: number, body: string) => {
+    try {
+      await fetch(`${this.garage}/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    } catch {
+      throw new Error()
+    }
+  }
 }
 
 class EngineMethods extends CarsInstance {
-  startEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=started`)
+  startEngine = async (id: number) => {
+    try {
+      const response = await fetch(`${this.engine}?id=${id}&status=started`)
+      return {
+        status: response.status,
+        result: response.json(),
+      }
+    } catch {
+      throw new Error()
+    }
+  }
 
-  stopEngine = async (id: number) => await fetch(`${this.engine}?id=${id}&status=stoped`)
+  stopEngine = async (id: number) => {
+    try {
+      const response = await fetch(`${this.engine}?id=${id}&status=stoped`)
+      return {
+        status: response.status,
+        result: response.json(),
+      }
+    } catch {
+      throw new Error()
+    }
+  }
 
   drive = async (id: number) => {
     const res = await fetch(`${this.engine}?id=${id}&status=stoped`)

@@ -1,8 +1,9 @@
+import { Button } from 'components/Button'
 import { createElementWithClassName } from 'helpers'
 
-import styles from './styles.css'
-import { Button } from 'components/Button'
 import { workDataInstance } from 'helpers/instanses'
+
+import styles from './styles.css'
 
 export const ActionButtons = (id: number) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
