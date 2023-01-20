@@ -38,6 +38,7 @@ class CarsInstance {
           'Content-Type': 'application/json',
         },
       })
+      renderPage()
     } catch {
       throw new Error()
     }
