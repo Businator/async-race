@@ -13,9 +13,9 @@ export const Garage = async () => {
 
   const { items, count } = await workDataInstance.getCars(1)
 
-  const { name, color, id } = items[0]
+  // const { name, color, id } = items[0]
 
-  main.append(CarCreationMenu(/* id */))
+  main.append(CarCreationMenu(/* id as number */))
 
   items.forEach((car) => main.append(CarInGarage(car)))
 

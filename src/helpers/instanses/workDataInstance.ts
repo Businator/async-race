@@ -50,11 +50,11 @@ class CarsInstance {
     }
   }
 
-  updateCar = async (id: number, body: string) => {
+  updateCar = async (id: number, car: Car) => {
     try {
       await fetch(`${this.garage}/${id}`, {
         method: 'PUT',
-        body: JSON.stringify(body),
+        body: JSON.stringify(car),
         headers: {
           'Content-Type': 'application/json',
         },

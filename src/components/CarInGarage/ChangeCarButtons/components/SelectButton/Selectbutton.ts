@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import { workDataInstance } from 'helpers/instanses'
+import { workDataInstance, workWithSelectCar } from 'helpers/instanses'
 
 import styles from './styles.css'
 
@@ -10,6 +10,7 @@ export const SelectButton = (id: number) => {
     classname: styles.btn,
     onclick() {
       workDataInstance.getCar(id)
+      workWithSelectCar.getId(id)
     },
   })
   return button

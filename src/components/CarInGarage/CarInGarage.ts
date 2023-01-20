@@ -10,7 +10,7 @@ import styles from './styles.css'
 export const CarInGarage = ({ color, name, id }: Car) => {
   const container = createElementWithClassName({ tagName: 'li', classname: styles.container })
 
-  container.append(ChangeCarButtons(id, name), CarImg(color), ActionButtons(id))
+  container.append(ChangeCarButtons(id as number, name), CarImg(color), ActionButtons(id as number))
 
   return container
 }
