@@ -6,6 +6,7 @@ import { workDataInstance } from 'helpers/instanses'
 import { generateRandomCars } from 'utils/generateRandomCars'
 
 import styles from './styles.css'
+import { renderPage } from 'utils/renderPage'
 
 export const ActionButtons = (/* id: number */) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
@@ -31,6 +32,7 @@ export const ActionButtons = (/* id: number */) => {
       onclick() {
         const arrayRandomCars = generateRandomCars()
         arrayRandomCars.forEach((car) => workDataInstance.createCar(car))
+        renderPage()
       },
     }),
   )
