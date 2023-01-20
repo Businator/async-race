@@ -8,7 +8,7 @@ import styles from './styles.css'
 export const CarCreationMenu = (/* id: number */) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
 
-  container.append(CreationForm(), UpdateForm() /* , ActionButtons(id) */)
+  container.append(CreationForm(), UpdateForm(), ActionButtons(/* id */))
 
   return container
 }
