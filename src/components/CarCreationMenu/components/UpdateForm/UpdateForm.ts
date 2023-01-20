@@ -17,7 +17,7 @@ export const UpdateForm = () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault()
     const car = { name: inputName.value, color: inputColor.value }
-    const id = workWithSelectCar.setId()
+    const id = workWithSelectCar.getId()
     if (typeof id === 'number') {
       workDataInstance.updateCar(id, car)
     }

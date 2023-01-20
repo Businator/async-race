@@ -1,11 +1,11 @@
 class SaveSelectCarNumber {
   id: number | undefined
 
-  getId(id: number) {
+  setId(id: number) {
     this.id = id
   }
 
-  setId() {
+  getId() {
     return this.id
   }
 }

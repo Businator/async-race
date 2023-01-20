@@ -10,7 +10,7 @@ export const SelectButton = (id: number) => {
     classname: styles.btn,
     onclick() {
       workDataInstance.getCar(id)
-      workWithSelectCar.getId(id)
+      workWithSelectCar.setId(id)
     },
   })
   return button
