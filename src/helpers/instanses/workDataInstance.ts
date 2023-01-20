@@ -1,4 +1,5 @@
 import { Car, Cars } from 'types'
+import { renderPage } from 'utils/renderPage'
 
 class CarsInstance {
   base = 'http://127.0.0.1:3000'
@@ -45,6 +46,7 @@ class CarsInstance {
   deleteCar = async (id: number) => {
     try {
       await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
+      renderPage()
     } catch {
       throw new Error()
     }
@@ -59,6 +61,7 @@ class CarsInstance {
           'Content-Type': 'application/json',
         },
       })
+      renderPage()
     } catch {
       throw new Error()
     }
