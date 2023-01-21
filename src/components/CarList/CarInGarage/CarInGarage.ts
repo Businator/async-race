@@ -1,4 +1,4 @@
-import { CarImg } from 'components/CarImg'
+import { Road } from 'components/Road'
 import { createElementWithClassName } from 'helpers/createElementWithClassName'
 
 import { Car } from 'types'
@@ -10,7 +10,7 @@ import styles from './styles.css'
 export const CarInGarage = ({ color, name, id }: Car) => {
   const container = createElementWithClassName({ tagName: 'li', classname: styles.container })
 
-  container.append(ChangeCarButtons(id as number, name), CarImg(color), ActionButtons(id as number))
+  container.append(ChangeCarButtons(id as number, name), Road(color, id as number), ActionButtons(id as number))
 
   return container
 }

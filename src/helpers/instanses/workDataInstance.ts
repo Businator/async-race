@@ -1,4 +1,5 @@
 import { Car, Cars } from 'types'
+import { CarEngine } from 'types/CarEngiine'
 import { renderPage } from 'utils/renderPage'
 
 class CarsInstance {
@@ -70,12 +71,14 @@ class CarsInstance {
 }
 
 class EngineMethods extends CarsInstance {
-  startEngine = async (id: number) => {
+  startEngine = async (id: number): Promise<{ status: number; result: CarEngine }> => {
     try {
-      const response = await fetch(`${this.engine}?id=${id}&status=started`)
+      const response = await fetch(`${this.engine}?id=${id}&status=started`, {
+        method: 'PATCH',
+      })
       return {
         status: response.status,
-        result: response.json(),
+        result: (await response.json()) as CarEngine,
       }
     } catch {
       throw new Error()
@@ -84,10 +87,12 @@ class EngineMethods extends CarsInstance {
 
   stopEngine = async (id: number) => {
     try {
-      const response = await fetch(`${this.engine}?id=${id}&status=stoped`)
+      const response = await fetch(`${this.engine}?id=${id}&status=stopped`, {
+        method: 'PATCH',
+      })
       return {
         status: response.status,
-        result: response.json(),
+        result: (await response.json()) as CarEngine,
       }
     } catch {
       throw new Error()
@@ -95,8 +100,14 @@ class EngineMethods extends CarsInstance {
   }
 
   drive = async (id: number) => {
-    const res = await fetch(`${this.engine}?id=${id}&status=stoped`)
-    return res.status !== 200 ? { success: false } : { ...((await res.json()) as Error) }
+    try {
+      const response = await fetch(`${this.engine}?id=${id}&status=drive`, {
+        method: 'PATCH',
+      })
+      return response.status
+    } catch {
+      throw new Error()
+    }
   }
 }
 

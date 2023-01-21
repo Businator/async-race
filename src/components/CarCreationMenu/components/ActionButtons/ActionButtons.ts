@@ -5,8 +5,9 @@ import { workDataInstance } from 'helpers/instanses'
 
 import { generateRandomCars } from 'utils/generateRandomCars'
 
-import styles from './styles.css'
 import { renderPage } from 'utils/renderPage'
+
+import styles from './styles.css'
 
 export const ActionButtons = (/* id: number */) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })

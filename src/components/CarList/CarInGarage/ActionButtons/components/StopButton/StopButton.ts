@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 
-import { workDataInstance } from 'helpers/instanses'
+import { workWithdriving } from 'helpers/instanses'
 
 import styles from './styles.css'
 
@@ -9,8 +9,11 @@ export const StopButton = (id: number) => {
     children: 'Stop',
     classname: styles.btn,
     onclick() {
-      workDataInstance.stopEngine(id)
+      workWithdriving.stopDriving(id)
+      button.disabled = false
     },
   })
+  button.setAttribute('btn-stop', id.toString())
+  button.disabled = true
   return button
 }

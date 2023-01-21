@@ -2,8 +2,10 @@ import { createElementWithClassName } from 'helpers'
 
 import styles from './styles.css'
 
-export const CarImg = (color: string) => {
+export const CarImg = (color: string, id: number) => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
+
+  container.setAttribute('carId', id.toString())
 
   container.insertAdjacentHTML(
     'afterbegin',
@@ -17,9 +19,6 @@ export const CarImg = (color: string) => {
   </g>
   </svg>`,
   )
-  const flag = createElementWithClassName({ tagName: 'div' })
-  flag.innerHTML = '&#128681'
-  container.append(flag)
 
   return container
 }

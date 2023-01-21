@@ -1,6 +1,8 @@
 import { Button } from 'components/Button'
 
-import { workDataInstance } from 'helpers/instanses'
+// import { workDataInstance } from 'helpers/instanses'
+
+import { workWithdriving } from 'helpers/instanses'
 
 import styles from './styles.css'
 
@@ -9,8 +11,9 @@ export const StartButton = (id: number) => {
     children: 'Start',
     classname: styles.btn,
     onclick() {
-      workDataInstance.startEngine(id)
+      workWithdriving.startDriving(id)
     },
   })
+  button.setAttribute('btn-start', id.toString())
   return button
 }
