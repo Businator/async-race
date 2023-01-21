@@ -1,7 +1,7 @@
 import { Button } from 'components/Button'
 import { createElementWithClassName } from 'helpers'
 
-import { workDataInstance } from 'helpers/instanses'
+import { workDataInstance, workWithdriving } from 'helpers/instanses'
 
 import { generateRandomCars } from 'utils/generateRandomCars'
 
@@ -9,24 +9,24 @@ import { renderPage } from 'utils/renderPage'
 
 import styles from './styles.css'
 
-export const ActionButtons = (/* id: number */) => {
+export const ActionButtons = () => {
   const container = createElementWithClassName({ tagName: 'div', classname: styles.container })
 
   container.append(
-    // Button({
-    //   children: 'Race',
-    //   classname: styles.btn,
-    //   onclick() {
-    //     workDataInstance.startEngine(id)
-    //   },
-    // }),
-    // Button({
-    //   children: 'Reset',
-    //   classname: styles.btn,
-    //   onclick() {
-    //     workDataInstance.stopEngine(id)
-    //   },
-    // }),
+    Button({
+      children: 'Race',
+      classname: styles.btn,
+      onclick() {
+        workWithdriving.raceAllcar()
+      },
+    }),
+    Button({
+      children: 'Reset',
+      classname: styles.btn,
+      onclick() {
+        workWithdriving.resetAllcar()
+      },
+    }),
     Button({
       children: 'Generate Cars',
       classname: styles.btn,

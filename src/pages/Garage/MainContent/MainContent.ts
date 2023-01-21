@@ -14,7 +14,7 @@ export const MainContent = async () => {
   workWithPagination.setCount(+count!)
 
   main.append(
-    CarCreationMenu(/* id as number */),
+    CarCreationMenu(),
     Text({ tagName: 'h2', text: `Garage (${count as string})` }),
     Text({ tagName: 'h3', text: `Page #${workWithPagination.getNumberPage()}` }),
     ActionButtons(),

@@ -1,6 +1,9 @@
 import { workDataInstance } from './workDataInstance'
+import { workWithPagination } from './workWithPagination'
 
 class Driving {
+  memberArray: { carid: string | null; time: number }[] = []
+
   getCar(id: number) {
     return document.querySelector(`[carid = '${id}']`) as HTMLElement
   }
@@ -52,8 +55,29 @@ class Driving {
       easing: 'ease-out',
     })
     animation.play()
-    animation.onfinish = () => (car.style.left = `calc(100% - ${carWidth}px)`)
+    animation.onfinish = () => {
+      car.style.left = `calc(100% - ${carWidth}px)`
+      this.memberArray.push({ carid: car.getAttribute('carid'), time })
+      if (this.memberArray.length === 1) {
+        console.log(this.memberArray)
+      }
+    }
   }
 }
 
-export const workWithdriving = new Driving()
+class DrivingForAllCars extends Driving {
+  async raceAllcar() {
+    ;(await workDataInstance.getCars(workWithPagination.getNumberPage())).items.map((car) =>
+      this.startDriving(car.id as number),
+    )
+  }
+
+  async resetAllcar() {
+    const cars = (await workDataInstance.getCars(workWithPagination.getNumberPage())).items
+    cars.forEach((car) => {
+      this.stopDriving(car.id as number)
+    })
+  }
+}
+
+export const workWithdriving = new DrivingForAllCars()
