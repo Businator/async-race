@@ -1,0 +1,32 @@
+import { Button } from 'components/Button'
+import { createElementWithClassName } from 'helpers'
+import { workWithPaginationGarage, workWithPaginationWinners } from 'helpers/instanses'
+
+export const ButtonsForPagination = (
+  method: typeof workWithPaginationGarage | typeof workWithPaginationWinners,
+  numberOfItems: number,
+) => {
+  const container = createElementWithClassName({ tagName: 'div' })
+
+  const prevButton = Button({
+    children: 'Prev',
+    async onclick() {
+      await method.prevPage()
+    },
+  })
+
+  if (method.getNumberPage() === 1) prevButton.disabled = true
+
+  const nextButton = Button({
+    children: 'Next',
+    async onclick() {
+      await method.nextPage()
+    },
+  })
+
+  if (method.getNumberPage() * numberOfItems >= method.getCoutn()) nextButton.disabled = true
+
+  container.append(prevButton, nextButton)
+
+  return container
+}
