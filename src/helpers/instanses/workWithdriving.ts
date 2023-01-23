@@ -1,10 +1,10 @@
 import { Body } from 'components/Body'
 import { ModalWindow } from 'components/ModalWindow'
+import { workWithPaginationGarage } from 'helpers/instanses'
 
 import { roundNumber } from 'helpers/roundNumber'
 
 import { workDataInstance } from './workDataInstance'
-import { workWithPagination } from './workWithPagination'
 
 class Driving {
   memberArray: Array<{ carid: string | null; time: number }> = []
@@ -88,13 +88,13 @@ class Driving {
 
 class DrivingForAllCars extends Driving {
   async raceAllcar() {
-    ;(await workDataInstance.getCars(workWithPagination.getNumberPage())).items.map(
+    ;(await workDataInstance.getCars(workWithPaginationGarage.getNumberPage())).items.map(
       async (car) => await this.startDriving(car.id as number),
     )
   }
 
   async resetAllcar() {
-    const cars = (await workDataInstance.getCars(workWithPagination.getNumberPage())).items
+    const cars = (await workDataInstance.getCars(workWithPaginationGarage.getNumberPage())).items
     cars.forEach((car) => {
       this.stopDriving(car.id as number)
     })

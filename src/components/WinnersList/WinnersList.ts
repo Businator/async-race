@@ -1,6 +1,7 @@
+import { ButtonsForPagination } from 'components/ButtonsForPagination'
 import { Text } from 'components/Text'
 import { createElementWithClassName } from 'helpers'
-import { workDataInstance, workWithPagination } from 'helpers/instanses'
+import { workDataInstance, workWithPaginationWinners } from 'helpers/instanses'
 
 import { Car } from 'types'
 
@@ -9,14 +10,14 @@ import { WinnerElement } from './WinnerElement'
 export const WinnersList = async () => {
   const list = createElementWithClassName({ tagName: 'ul' })
 
-  const { result, totalCount } = await workDataInstance.getWinners(1)
+  const { result, totalCount } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
 
   list.append(
     Text({ tagName: 'h1', text: `Winners (${totalCount})` }),
-    Text({ tagName: 'h2', text: `Page #${workWithPagination.getNumberPage()}` }),
+    Text({ tagName: 'h2', text: `Page #${workWithPaginationWinners.getNumberPage()}` }),
+    ButtonsForPagination(workWithPaginationWinners, 10),
   )
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   result.forEach(async (winner, index) => {
     const { result, status } = await workDataInstance.getCar(winner.id)
     if (status === 404) {
