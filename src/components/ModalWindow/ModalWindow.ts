@@ -1,5 +1,5 @@
 import { Text } from 'components/Text'
-import { createElementWithClassName } from 'helpers'
+import { createElementWithClassName, roundNumber } from 'helpers'
 
 import styles from './styles.css'
 
@@ -10,7 +10,7 @@ export const ModalWindow = (name: string, time: number) => {
 
   const congrats = Text({
     tagName: 'h2',
-    text: `${name} wont first [${(time / 1000).toFixed(3)}s]!`,
+    text: `${name} wont first [${roundNumber(time)}s]!`,
     classname: styles.congrats,
   })
 

@@ -1,12 +1,14 @@
-import { Text } from 'components/Text'
-import { workDataInstance } from 'helpers/instanses'
+import { createElementWithClassName } from 'helpers'
+
+import { MainContent } from './MainContent'
 
 export const Winners = async () => {
   const fragment = document.createDocumentFragment()
 
-  fragment.append(Text({ tagName: 'h1', text: `Winners` }))
+  const header = createElementWithClassName({ tagName: 'header' })
+  header.append()
 
-  console.log(await workDataInstance.getWinners(1))
+  fragment.append(await MainContent())
 
   return fragment
 }

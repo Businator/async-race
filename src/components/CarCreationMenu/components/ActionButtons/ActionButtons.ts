@@ -3,6 +3,7 @@ import { createElementWithClassName } from 'helpers'
 
 import { workDataInstance, workWithDriving } from 'helpers/instanses'
 
+import { Garage } from 'pages/Garage'
 import { generateRandomCars } from 'utils/generateRandomCars'
 
 import { renderPage } from 'utils/renderPage'
@@ -33,10 +34,10 @@ export const ActionButtons = () => {
   const buttomGenerate = Button({
     children: 'Generate Cars',
     classname: styles.btn,
-    onclick() {
+    async onclick() {
       const arrayRandomCars = generateRandomCars()
       arrayRandomCars.forEach((car) => workDataInstance.createCar(car))
-      renderPage()
+      renderPage(await Garage())
     },
   })
 

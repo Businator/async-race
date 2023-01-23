@@ -1,7 +1,6 @@
 import { Car, Cars } from 'types'
 import { CarEngine } from 'types/CarEngiine'
 import { Winner } from 'types/Winner'
-import { renderPage } from 'utils/renderPage'
 
 class CarsInstance {
   base = 'http://127.0.0.1:3000'
@@ -25,7 +24,7 @@ class CarsInstance {
   getCar = async (id: number) => {
     try {
       const response = await fetch(`${this.garage}/${id}`)
-      return (await response.json()) as [Car]
+      return { status: response.status, result: (await response.json()) as [Car] }
     } catch {
       throw new Error()
     }
@@ -40,7 +39,6 @@ class CarsInstance {
           'Content-Type': 'application/json',
         },
       })
-      renderPage()
     } catch {
       throw new Error()
     }
@@ -49,7 +47,6 @@ class CarsInstance {
   deleteCar = async (id: number) => {
     try {
       await fetch(`${this.garage}/${id}`, { method: 'DELETE' })
-      renderPage()
     } catch {
       throw new Error()
     }
@@ -64,7 +61,6 @@ class CarsInstance {
           'Content-Type': 'application/json',
         },
       })
-      renderPage()
     } catch {
       throw new Error()
     }

@@ -1,6 +1,8 @@
 import { Body } from 'components/Body'
 import { ModalWindow } from 'components/ModalWindow'
 
+import { roundNumber } from 'helpers/roundNumber'
+
 import { workDataInstance } from './workDataInstance'
 import { workWithPagination } from './workWithPagination'
 
@@ -8,19 +10,19 @@ class Driving {
   memberArray: Array<{ carid: string | null; time: number }> = []
 
   async createOrUpdateWinner(id: number, time: number) {
-    const carData = await workDataInstance.getWinner(id)
-    if (carData.status === 404) {
-      workDataInstance.createWinner({ id, wins: 1, time })
-    } else if (carData.status === 200 && carData.result.time > time) {
+    const { result, status } = await workDataInstance.getWinner(id)
+    if (status === 404) {
+      workDataInstance.createWinner({ id, wins: 1, time: Number(roundNumber(time)) })
+    } else if (status === 200 && result.time > Number(roundNumber(time))) {
       workDataInstance.updateWinner({
         id,
-        wins: (carData.result.wins += 1),
-        time,
+        wins: (result.wins += 1),
+        time: Number(roundNumber(time)),
       })
     }
   }
 
-  animationCar(car: HTMLElement, time: number, id: number) {
+  animationCar(car: HTMLElement, time: number) {
     const carWidth = car.getBoundingClientRect().width
     const animation = car.animate([{ left: '0%' }, { left: `calc(100% - ${carWidth}px)` }], {
       duration: time,
@@ -56,7 +58,7 @@ class Driving {
     if (status === 200) {
       const time = result.distance / result.velocity
       this.switchToDriveMode(id)
-      this.animationCar(this.getCar(id), time, id)
+      this.animationCar(this.getCar(id), time)
       this.getButtonStart(id).disabled = true
       this.getButtonStop(id).disabled = false
     }

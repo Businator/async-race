@@ -7,8 +7,8 @@ export const ActionButtons = () => {
 
   const prevButton = Button({
     children: 'Prev',
-    async onclick() {
-      await workWithPagination.prevPage()
+    onclick() {
+      workWithPagination.prevPage()
     },
   })
 
@@ -16,8 +16,8 @@ export const ActionButtons = () => {
 
   const nextButton = Button({
     children: 'Next',
-    async onclick() {
-      await workWithPagination.nextPage()
+    onclick() {
+      workWithPagination.nextPage()
     },
   })
 

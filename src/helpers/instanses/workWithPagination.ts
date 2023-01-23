@@ -1,3 +1,4 @@
+import { Garage } from 'pages/Garage'
 import { renderPage } from 'utils/renderPage'
 
 class Pagination {
@@ -5,17 +6,17 @@ class Pagination {
   numberPage = 1
   count = 1
 
-  nextPage() {
+  async nextPage() {
     this.stepPage++
     this.numberPage = this.stepPage
-    renderPage()
+    renderPage(await Garage())
   }
 
-  prevPage() {
+  async prevPage() {
     if (this.numberPage > 1) {
       this.stepPage--
       this.numberPage = this.stepPage
-      renderPage()
+      renderPage(await Garage())
     }
   }
 
