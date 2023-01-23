@@ -2,42 +2,23 @@ import { Garage } from 'pages/Garage'
 import { Winners } from 'pages/Winners'
 import { renderPage } from 'utils/renderPage'
 
+import { workDataInstance } from './workDataInstance'
+import { workWithSort } from './workWithSort'
+
 abstract class Pagination {
   abstract stepPage: number
   abstract numberPage: number
   abstract count: number
 
-  // constructor(stepPage = 1, numberPage = 1, count = 1) {
-  //   this.stepPage = stepPage
-  //   this.numberPage = numberPage
-  //   this.count = count
-  // }
+  abstract nextPage(): void
 
-  /* async */ abstract nextPage(): void /* {
-    this.stepPage++
-    this.numberPage = this.stepPage
-    renderPage(await Garage())
-  } */
+  abstract prevPage(): void
 
-  /* async */ abstract prevPage(): void /* {
-    if (this.numberPage > 1) {
-      this.stepPage--
-      this.numberPage = this.stepPage
-      renderPage(await Garage())
-    }
-  } */
+  abstract getNumberPage(): number
 
-  abstract getNumberPage(): number /* {
-    return this.numberPage
-  } */
+  abstract setCount(count: number): void
 
-  abstract setCount(count: number): void /* {
-    this.count = count
-  } */
-
-  abstract getCoutn(): number /* {
-    return this.count
-  } */
+  abstract getCoutn(): number
 }
 
 class PaginationGarage extends Pagination {
@@ -94,6 +75,8 @@ class PaginationWinners extends Pagination {
   async nextPage(): Promise<void> {
     this.stepPage++
     this.numberPage = this.stepPage
+    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+    workWithSort.setSort(result)
     renderPage(await Winners())
   }
 
@@ -101,6 +84,8 @@ class PaginationWinners extends Pagination {
     if (this.numberPage > 1) {
       this.stepPage--
       this.numberPage = this.stepPage
+      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+      workWithSort.setSort(result)
       renderPage(await Winners())
     }
   }

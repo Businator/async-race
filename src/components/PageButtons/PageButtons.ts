@@ -1,6 +1,7 @@
 import { Button } from 'components/Button'
 import { Layout } from 'components/Layout'
 import { createElementWithClassName } from 'helpers'
+import { workDataInstance, workWithPaginationWinners, workWithSort } from 'helpers/instanses'
 import { Garage } from 'pages/Garage'
 import { Winners } from 'pages/Winners'
 
@@ -17,6 +18,8 @@ export const PageButtons = () => {
   const buttonToWinners = Button({
     children: 'To Winners',
     async onclick() {
+      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+      workWithSort.setSort(result)
       Layout(await Winners())
     },
   })

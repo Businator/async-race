@@ -15,11 +15,11 @@ export const WinnerElement = (
   const element = createElementWithClassName({ tagName: 'li', classname: styles.element })
 
   element.append(
-    Text({ tagName: 'span', text: number.toString() }),
+    Text({ tagName: 'span', text: `№${number.toString()}` }),
     CarImg(color, id),
     Text({ tagName: 'span', text: name }),
-    Text({ tagName: 'span', text: winsCount.toString() }),
-    Text({ tagName: 'span', text: time.toString() }),
+    Text({ tagName: 'span', text: `Wins: ${winsCount.toString()}` }),
+    Text({ tagName: 'span', text: `${time.toString()}s` }),
   )
 
   return element
