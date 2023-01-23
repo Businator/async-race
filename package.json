@@ -1,7 +1,7 @@
 {
-  "name": "online-store",
-  "version": "1.1.0",
-  "description": "Online Store",
+  "name": "async-race",
+  "version": "1.0",
+  "description": "Async Race",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
     "build": "tsc && cross-env NODE_ENV=production webpack",
@@ -10,22 +10,13 @@
     "lint:scripts": "eslint --ext .ts,.tsx src",
     "lint:scripts:fix": "npm run lint:scripts -- --fix",
     "lint:styles": "stylelint \"src/**/*.css\"",
-    "lint:styles:fix": "npm run lint:styles -- --fix",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:cov": "cross-env NODE_ENV=test jest --coverage",
-    "test:watch": "cross-env NODE_ENV=test jest --watch",
-    "test:debug": "cross-env NODE_ENV=test node --inspect-brk node_modules/.bin/jest --runInBand"
+    "lint:styles:fix": "npm run lint:styles -- --fix"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/A-Hanchar/online-store.git"
+    "url": "git+https://github.com/Businator/async-race.git"
   },
   "authors": [
-    {
-      "name": "Artsiom Hanchar",
-      "email": "artsiom.hanchar@gmail.com",
-      "url": "https://github.com/A-Hanchar"
-    },
     {
       "name": "Marat Deniullov",
       "email": "deniullov@gmail.com",

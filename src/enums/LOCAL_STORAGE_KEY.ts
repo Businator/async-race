@@ -1,4 +1,0 @@
-export enum LOCAL_STORAGE_KEY {
-  PRODUCTS = 'PRODUCTS',
-  PROMO_CODES = 'PROMO_CODES',
-}

@@ -1,1 +1,1 @@
-export const THREE_SECONDS = 3000
+export const ONE = 1

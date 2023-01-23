@@ -1,6 +1,7 @@
 import { ButtonsForPagination } from 'components/ButtonsForPagination'
 import { Text } from 'components/Text'
-import { createElementWithClassName } from 'helpers'
+import { CODES } from 'enums'
+import { ONE, createElementWithClassName } from 'helpers'
 import { workDataInstance, workWithPaginationWinners, workWithSort } from 'helpers/instanses'
 
 import { Car } from 'types'
@@ -22,11 +23,11 @@ export const WinnersList = async () => {
 
   workWithSort.getSort().forEach(async (winner, index) => {
     const { result, status } = await workDataInstance.getCar(winner.id)
-    if (status === 404) {
+    if (status === CODES.NOT_FOUND) {
       await workDataInstance.deleteWinner(winner.id)
     } else {
       const { name, color } = result as unknown as Car
-      list.append(WinnerElement(index + 1, color, name, winner.id, winner.wins, winner.time))
+      list.append(WinnerElement(index + ONE, color, name, winner.id, winner.wins, winner.time))
     }
   })
 

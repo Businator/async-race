@@ -1,3 +1,4 @@
+import { TYPE_SORT } from 'enums'
 import { Winner } from 'types/Winner'
 
 import { workDataInstance } from './workDataInstance'
@@ -6,9 +7,9 @@ import { workWithPaginationWinners } from './workWithPagination'
 class Sort {
   sortResult: Winner[] = []
 
-  async sortTime(typeSort: 'ASC' | 'DESC') {
+  async sortTime(typeSort: TYPE_SORT.ASC | TYPE_SORT.DESC) {
     const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
-    if (typeSort === 'ASC') {
+    if (typeSort === TYPE_SORT.ASC) {
       result.sort((a, b) => b.time - a.time)
     } else {
       result.sort((a, b) => a.time - b.time)
@@ -17,9 +18,9 @@ class Sort {
     this.setSort(result)
   }
 
-  async sortWins(typeSort: 'ASC' | 'DESC') {
+  async sortWins(typeSort: TYPE_SORT.ASC | TYPE_SORT.DESC) {
     const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
-    if (typeSort === 'ASC') {
+    if (typeSort === TYPE_SORT.ASC) {
       result.sort((a, b) => b.wins - a.wins)
     } else {
       result.sort((a, b) => a.wins - b.wins)

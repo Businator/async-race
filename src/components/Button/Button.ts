@@ -5,8 +5,6 @@ import { ButtonProps } from './types'
 export const Button = ({ children, classname, onclick, type }: ButtonProps) => {
   const button = createElementWithClassName({ tagName: 'button', classname })
 
-  // children && button.append(children)
-
   if (typeof children === 'string') {
     button.textContent = children
   }

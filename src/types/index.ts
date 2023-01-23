@@ -1,3 +1,5 @@
 export type { PropsWithChildren } from './PropsWithChildren'
 export type { Cars } from './Cars'
 export type { Car } from './Car'
+export type { CarEngine } from './CarEngine'
+export type { Winner } from './Winner'

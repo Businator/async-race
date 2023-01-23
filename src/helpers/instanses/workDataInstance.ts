@@ -1,6 +1,4 @@
-import { Car, Cars } from 'types'
-import { CarEngine } from 'types/CarEngiine'
-import { Winner } from 'types/Winner'
+import { Car, Cars, CarEngine, Winner } from 'types'
 
 class CarsInstance {
   base = 'http://127.0.0.1:3000'
