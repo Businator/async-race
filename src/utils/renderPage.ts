@@ -1,6 +1,6 @@
-import { Body } from 'components/Body'
+import { Layout } from 'components/Layout'
 import { Garage } from 'pages/Garage'
 
 export const renderPage = async () => {
-  Body.replaceChildren(await Garage())
+  Layout(await Garage())
 }

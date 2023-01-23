@@ -13,3 +13,7 @@
 .congrats {
   color: red;
 }
+
+.remove {
+  display: none;
+}

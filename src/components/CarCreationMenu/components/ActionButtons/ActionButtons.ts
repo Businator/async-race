@@ -1,7 +1,7 @@
 import { Button } from 'components/Button'
 import { createElementWithClassName } from 'helpers'
 
-import { workDataInstance, workWithdriving } from 'helpers/instanses'
+import { workDataInstance, workWithDriving } from 'helpers/instanses'
 
 import { generateRandomCars } from 'utils/generateRandomCars'
 
@@ -16,7 +16,7 @@ export const ActionButtons = () => {
     children: 'Race',
     classname: styles.btn,
     onclick() {
-      workWithdriving.raceAllcar()
+      workWithDriving.raceAllcar()
       buttomRace.disabled = true
     },
   })
@@ -25,7 +25,7 @@ export const ActionButtons = () => {
     children: 'Reset',
     classname: styles.btn,
     onclick() {
-      workWithdriving.resetAllcar()
+      workWithDriving.resetAllcar()
       buttomRace.disabled = false
     },
   })

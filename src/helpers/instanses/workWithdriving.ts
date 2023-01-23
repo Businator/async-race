@@ -7,6 +7,38 @@ import { workWithPagination } from './workWithPagination'
 class Driving {
   memberArray: Array<{ carid: string | null; time: number }> = []
 
+  async createOrUpdateWinner(id: number, time: number) {
+    const carData = await workDataInstance.getWinner(id)
+    if (carData.status === 404) {
+      workDataInstance.createWinner({ id, wins: 1, time })
+    } else if (carData.status === 200 && carData.result.time > time) {
+      workDataInstance.updateWinner({
+        id,
+        wins: (carData.result.wins += 1),
+        time,
+      })
+    }
+  }
+
+  animationCar(car: HTMLElement, time: number, id: number) {
+    const carWidth = car.getBoundingClientRect().width
+    const animation = car.animate([{ left: '0%' }, { left: `calc(100% - ${carWidth}px)` }], {
+      duration: time,
+      easing: 'ease-out',
+    })
+    this.memberArray.length = 0
+    animation.play()
+    animation.onfinish = async () => {
+      car.style.left = `calc(100% - ${carWidth}px)`
+      this.memberArray.push({ carid: car.getAttribute('carid'), time })
+      if (this.memberArray.length === 1) {
+        const carName = car.parentElement?.previousSibling?.lastChild?.textContent as string
+        Body.append(ModalWindow(carName, time))
+        await this.createOrUpdateWinner(Number(this.memberArray[0]?.carid), time)
+      }
+    }
+  }
+
   getCar(id: number) {
     return document.querySelector(`[carid = '${id}']`) as HTMLElement
   }
@@ -24,7 +56,7 @@ class Driving {
     if (status === 200) {
       const time = result.distance / result.velocity
       this.switchToDriveMode(id)
-      this.animationCar(this.getCar(id), time)
+      this.animationCar(this.getCar(id), time, id)
       this.getButtonStart(id).disabled = true
       this.getButtonStop(id).disabled = false
     }
@@ -50,29 +82,12 @@ class Driving {
         .map((anim) => anim.pause())
     }
   }
-
-  animationCar(car: HTMLElement, time: number) {
-    const carWidth = car.getBoundingClientRect().width
-    const animation = car.animate([{ left: '0%' }, { left: `calc(100% - ${carWidth}px)` }], {
-      duration: time,
-      easing: 'ease-out',
-    })
-    animation.play()
-    animation.onfinish = () => {
-      car.style.left = `calc(100% - ${carWidth}px)`
-      this.memberArray.push({ carid: car.getAttribute('carid'), time })
-      if (this.memberArray.length === 1) {
-        const carName = car.parentElement?.previousSibling?.lastChild?.textContent as string
-        Body.append(ModalWindow(carName, time))
-      }
-    }
-  }
 }
 
 class DrivingForAllCars extends Driving {
   async raceAllcar() {
-    ;(await workDataInstance.getCars(workWithPagination.getNumberPage())).items.map((car) =>
-      this.startDriving(car.id as number),
+    ;(await workDataInstance.getCars(workWithPagination.getNumberPage())).items.map(
+      async (car) => await this.startDriving(car.id as number),
     )
   }
 
@@ -84,4 +99,4 @@ class DrivingForAllCars extends Driving {
   }
 }
 
-export const workWithdriving = new DrivingForAllCars()
+export const workWithDriving = new DrivingForAllCars()

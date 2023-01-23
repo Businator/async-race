@@ -1,5 +1,6 @@
 import { Car, Cars } from 'types'
 import { CarEngine } from 'types/CarEngiine'
+import { Winner } from 'types/Winner'
 import { renderPage } from 'utils/renderPage'
 
 class CarsInstance {
@@ -111,4 +112,66 @@ class EngineMethods extends CarsInstance {
   }
 }
 
-export const workDataInstance = new EngineMethods()
+class WinnersInstance extends EngineMethods {
+  getWinners = async (page: number, limit = 10, sort = 'time', order = 'ASC') => {
+    try {
+      const response = await fetch(`${this.winners}?_page=${page}&_limit=${limit}&_sort=${sort}&_order=${order}`)
+      return {
+        result: (await response.json()) as Winner[],
+        totalCount: response.headers.get('X-Total-Count') || '0',
+      }
+    } catch {
+      throw new Error()
+    }
+  }
+
+  getWinner = async (id: number) => {
+    try {
+      const response = await fetch(`${this.winners}/${id}`)
+      return {
+        status: response.status,
+        result: (await response.json()) as Winner,
+      }
+    } catch {
+      throw new Error()
+    }
+  }
+
+  createWinner = async (car: Winner) => {
+    try {
+      const response = await fetch(`${this.winners}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(car),
+      })
+
+      return response.status
+    } catch {
+      throw new Error()
+    }
+  }
+
+  deleteWinner = async (id: number) => {
+    try {
+      await fetch(`${this.winners}/${id}`, {
+        method: 'DELETE',
+      })
+    } catch {
+      throw new Error()
+    }
+  }
+
+  updateWinner = async (car: Winner) => {
+    try {
+      await fetch(`${this.winners}/${car.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(car),
+      })
+    } catch {
+      throw new Error()
+    }
+  }
+}
+
+export const workDataInstance = new WinnersInstance()
