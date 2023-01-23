@@ -1,8 +1,11 @@
+import { Body } from 'components/Body'
+import { ModalWindow } from 'components/ModalWindow'
+
 import { workDataInstance } from './workDataInstance'
 import { workWithPagination } from './workWithPagination'
 
 class Driving {
-  memberArray: { carid: string | null; time: number }[] = []
+  memberArray: Array<{ carid: string | null; time: number }> = []
 
   getCar(id: number) {
     return document.querySelector(`[carid = '${id}']`) as HTMLElement
@@ -59,7 +62,8 @@ class Driving {
       car.style.left = `calc(100% - ${carWidth}px)`
       this.memberArray.push({ carid: car.getAttribute('carid'), time })
       if (this.memberArray.length === 1) {
-        console.log(this.memberArray)
+        const carName = car.parentElement?.previousSibling?.lastChild?.textContent as string
+        Body.append(ModalWindow(carName, time))
       }
     }
   }
