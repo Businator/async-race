@@ -5,15 +5,16 @@ import { workWithPaginationGarage } from 'helpers/instanses'
 import { roundNumber } from 'helpers/roundNumber'
 
 import { workDataInstance } from './workDataInstance'
+import { CODES } from 'enums'
 
 class Driving {
   memberArray: Array<{ carid: string | null; time: number }> = []
 
   async createOrUpdateWinner(id: number, time: number) {
     const { result, status } = await workDataInstance.getWinner(id)
-    if (status === 404) {
+    if (status === CODES.NOT_FOUND) {
       workDataInstance.createWinner({ id, wins: 1, time: Number(roundNumber(time)) })
-    } else if (status === 200 && result.time > Number(roundNumber(time))) {
+    } else if (status === CODES.OK && result.time > Number(roundNumber(time))) {
       workDataInstance.updateWinner({
         id,
         wins: (result.wins += 1),
