@@ -14,7 +14,7 @@ const hexLetters = '0123456789ABCDEF'
 const getRandomCarColor = () => {
   let carColor = '#'
 
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 0; i < 6; i++) {
     carColor += hexLetters[Math.floor(Math.random() * 16)] as string
   }
 

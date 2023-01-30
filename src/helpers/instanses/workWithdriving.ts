@@ -17,7 +17,7 @@ class Driving {
     } else if (status === CODES.OK && result.time > Number(roundNumber(time))) {
       workDataInstance.updateWinner({
         id,
-        wins: (result.wins += 1),
+        wins: result.wins++,
         time: Number(roundNumber(time)),
       })
     }
