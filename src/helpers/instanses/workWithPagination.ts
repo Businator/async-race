@@ -18,7 +18,7 @@ abstract class Pagination {
 
   abstract setCount(count: number): void
 
-  abstract getCoutn(): number
+  abstract getCount(): number
 }
 
 class PaginationGarage extends Pagination {
@@ -55,7 +55,7 @@ class PaginationGarage extends Pagination {
     this.count = count
   }
 
-  getCoutn(): number {
+  getCount(): number {
     return this.count
   }
 }
@@ -98,7 +98,7 @@ class PaginationWinners extends Pagination {
     this.count = count
   }
 
-  getCoutn(): number {
+  getCount(): number {
     return this.count
   }
 }
