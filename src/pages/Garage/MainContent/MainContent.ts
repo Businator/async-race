@@ -15,7 +15,7 @@ export const MainContent = async () => {
   main.append(
     CarCreationMenu(),
     Text({ tagName: 'h2', text: `Garage (${count as string})` }),
-    Text({ tagName: 'h3', text: `Page #${workWithPaginationGarage.getNumberPage()}` }),
+    Text({ tagName: 'h3', text: `Page #${workWithPaginationGarage.getPageNumber()}` }),
     ButtonsForPagination(workWithPaginationGarage, 7),
     await CarList(),
   )

@@ -6,7 +6,7 @@ import { CarInGarage } from './CarInGarage'
 export const CarList = async () => {
   const list = createElementWithClassName({ tagName: 'ul' })
 
-  const { items } = await workDataInstance.getCars(workWithPaginationGarage.getNumberPage())
+  const { items } = await workDataInstance.getCars(workWithPaginationGarage.getPageNumber())
 
   items.forEach((car) => list.append(CarInGarage(car)))
 

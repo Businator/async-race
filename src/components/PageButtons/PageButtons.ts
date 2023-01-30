@@ -18,7 +18,7 @@ export const PageButtons = () => {
   const buttonToWinners = Button({
     children: 'To Winners',
     async onclick() {
-      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
       workWithSort.setSort(result)
       Layout(await Winners())
     },

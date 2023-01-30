@@ -8,7 +8,7 @@ class Sort {
   sortResult: Winner[] = []
 
   async sortTime(typeSort: TYPE_SORT.ASC | TYPE_SORT.DESC) {
-    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
     if (typeSort === TYPE_SORT.ASC) {
       result.sort((a, b) => b.time - a.time)
     } else {
@@ -19,7 +19,7 @@ class Sort {
   }
 
   async sortWins(typeSort: TYPE_SORT.ASC | TYPE_SORT.DESC) {
-    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
     if (typeSort === TYPE_SORT.ASC) {
       result.sort((a, b) => b.wins - a.wins)
     } else {

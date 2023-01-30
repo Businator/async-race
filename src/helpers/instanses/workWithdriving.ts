@@ -88,13 +88,13 @@ class Driving {
 
 class DrivingForAllCars extends Driving {
   async raceAllcar() {
-    ;(await workDataInstance.getCars(workWithPaginationGarage.getNumberPage())).items.map(
+    ;(await workDataInstance.getCars(workWithPaginationGarage.getPageNumber())).items.map(
       async (car) => await this.startDriving(car.id as number),
     )
   }
 
   async resetAllcar() {
-    const cars = (await workDataInstance.getCars(workWithPaginationGarage.getNumberPage())).items
+    const cars = (await workDataInstance.getCars(workWithPaginationGarage.getPageNumber())).items
     cars.forEach((car) => {
       this.stopDriving(car.id as number)
     })

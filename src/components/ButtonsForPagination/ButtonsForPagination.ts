@@ -15,7 +15,7 @@ export const ButtonsForPagination = (
     },
   })
 
-  if (method.getNumberPage() === 1) prevButton.disabled = true
+  if (method.getPageNumber() === 1) prevButton.disabled = true
 
   const nextButton = Button({
     children: 'Next',
@@ -24,7 +24,7 @@ export const ButtonsForPagination = (
     },
   })
 
-  if (method.getNumberPage() * numberOfItems >= method.getCount()) nextButton.disabled = true
+  if (method.getPageNumber() * numberOfItems >= method.getCount()) nextButton.disabled = true
 
   container.append(prevButton, nextButton)
 

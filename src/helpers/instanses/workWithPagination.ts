@@ -7,14 +7,14 @@ import { workWithSort } from './workWithSort'
 
 abstract class Pagination {
   abstract stepPage: number
-  abstract numberPage: number
+  abstract pageNumber: number
   abstract count: number
 
   abstract nextPage(): void
 
   abstract prevPage(): void
 
-  abstract getNumberPage(): number
+  abstract getPageNumber(): number
 
   abstract setCount(count: number): void
 
@@ -23,32 +23,32 @@ abstract class Pagination {
 
 class PaginationGarage extends Pagination {
   stepPage: number
-  numberPage: number
+  pageNumber: number
   count: number
 
-  constructor(stepPage = 1, numberPage = 1, count = 1) {
+  constructor(stepPage = 1, pageNumber = 1, count = 1) {
     super()
     this.stepPage = stepPage
-    this.numberPage = numberPage
+    this.pageNumber = pageNumber
     this.count = count
   }
 
   async nextPage(): Promise<void> {
     this.stepPage++
-    this.numberPage = this.stepPage
+    this.pageNumber = this.stepPage
     renderPage(await Garage())
   }
 
   async prevPage(): Promise<void> {
-    if (this.numberPage > 1) {
+    if (this.pageNumber > 1) {
       this.stepPage--
-      this.numberPage = this.stepPage
+      this.pageNumber = this.stepPage
       renderPage(await Garage())
     }
   }
 
-  getNumberPage(): number {
-    return this.numberPage
+  getPageNumber(): number {
+    return this.pageNumber
   }
 
   setCount(count: number): void {
@@ -62,36 +62,36 @@ class PaginationGarage extends Pagination {
 
 class PaginationWinners extends Pagination {
   stepPage: number
-  numberPage: number
+  pageNumber: number
   count: number
 
-  constructor(stepPage = 1, numberPage = 1, count = 1) {
+  constructor(stepPage = 1, pageNumber = 1, count = 1) {
     super()
     this.stepPage = stepPage
-    this.numberPage = numberPage
+    this.pageNumber = pageNumber
     this.count = count
   }
 
   async nextPage(): Promise<void> {
     this.stepPage++
-    this.numberPage = this.stepPage
-    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+    this.pageNumber = this.stepPage
+    const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
     workWithSort.setSort(result)
     renderPage(await Winners())
   }
 
   async prevPage(): Promise<void> {
-    if (this.numberPage > 1) {
+    if (this.pageNumber > 1) {
       this.stepPage--
-      this.numberPage = this.stepPage
-      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+      this.pageNumber = this.stepPage
+      const { result } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
       workWithSort.setSort(result)
       renderPage(await Winners())
     }
   }
 
-  getNumberPage(): number {
-    return this.numberPage
+  getPageNumber(): number {
+    return this.pageNumber
   }
 
   setCount(count: number): void {

@@ -12,11 +12,11 @@ import { WinnerElement } from './WinnerElement'
 export const WinnersList = async () => {
   const list = createElementWithClassName({ tagName: 'ul' })
 
-  const { totalCount } = await workDataInstance.getWinners(workWithPaginationWinners.getNumberPage())
+  const { totalCount } = await workDataInstance.getWinners(workWithPaginationWinners.getPageNumber())
 
   list.append(
     Text({ tagName: 'h1', text: `Winners (${totalCount})` }),
-    Text({ tagName: 'h2', text: `Page #${workWithPaginationWinners.getNumberPage()}` }),
+    Text({ tagName: 'h2', text: `Page #${workWithPaginationWinners.getPageNumber()}` }),
     ButtonsForPagination(workWithPaginationWinners, 10),
     ActionButtons(),
   )
