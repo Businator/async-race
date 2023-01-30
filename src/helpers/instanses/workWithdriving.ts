@@ -56,7 +56,7 @@ class Driving {
 
   async startDriving(id: number) {
     const { status, result } = await workDataInstance.startEngine(id)
-    if (status === 200) {
+    if (status === CODES.OK) {
       const time = result.distance / result.velocity
       this.switchToDriveMode(id)
       this.animationCar(this.getCar(id), time)
@@ -67,7 +67,7 @@ class Driving {
 
   async stopDriving(id: number) {
     const { status } = await workDataInstance.stopEngine(id)
-    if (status === 200) {
+    if (status === CODES.OK) {
       this.getCar(id)
         .getAnimations()
         .map((anim) => anim.cancel())
@@ -79,7 +79,7 @@ class Driving {
 
   async switchToDriveMode(id: number) {
     const status = await workDataInstance.drive(id)
-    if (status === 500) {
+    if (status === CODES.INTERNAL_SERVER_ERROR) {
       this.getCar(id)
         .getAnimations()
         .map((anim) => anim.pause())
